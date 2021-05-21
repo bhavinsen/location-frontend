@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="box">
+                    <h1>Signup</h1>
+                    <p class="text-muted"> Please enter your Details</p>
+
+                    <!------------------------------------Full Name --------------------------------- -->
+                    <input type="text" name="name" placeholder="Username" formControlName="username" id="username" placeholder="Username" type="text" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required>
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Username Name is required</div>
+                    </div>
+
+
+                    <!------------------------------------state Name --------------------------------- -->
+                    <input type="text" name="city" placeholder="City" formControlName="city" id="city" placeholder="City" type="text" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" required>
+                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                        <div *ngIf="f.city.errors.required">Cityis required</div>
+                    </div>
+
+                    <!------------------------------------State Name --------------------------------- -->
+                    <input type="text" name="state" placeholder="state" formControlName="state" id="state" placeholder="state" type="text" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" required>
+                    <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                        <div *ngIf="f.state.errors.required">State is required</div>
+                    </div>
+
+
+                    <!------------------------------------Zip Name --------------------------------- -->
+                    <input type="text" name="zip" placeholder="zip" formControlName="zip" id="zip" placeholder="zip" type="text" [ngClass]="{ 'is-invalid': submitted && f.zip.errors }" required>
+                    <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">
+                        <div *ngIf="f.zip.errors.required">zip is required</div>
+                    </div>
+
+
+                    <!------------------------------------country Name --------------------------------- -->
+                    <input type="text" name="country" placeholder="country" formControlName="country" id="country" placeholder="country" type="text" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" required>
+                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                        <div *ngIf="f.country.errors.required">country is required</div>
+                    </div>
+                    <!------------------------------------Email Address --------------------------------- -->
+                    <input type="text" name="email" placeholder="Email" formControlName="email" id="email" placeholder="Email" type="text" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" required>
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                    </div>
+                    <!------------------------------------Password--------------------------------- -->
+                    <input type="password" formControlName="password" id="psw" name="psw" placeholder="Create password" type="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                    </div>
+
+                    <!------------------------------------Password Confirm--------------------------------- -->
+                    <input type="password" formControlName="password_confirm" id="password_confirm" name="password_confirm" placeholder="Confirm password" type="password" [ngClass]="{ 'is-invalid': submitted && f.password_confirm.errors }" required>
+                    <div *ngIf="submitted && f.password_confirm.errors" class="invalid-feedback">
+                        <div *ngIf="f.password_confirm.errors.required">Password is required</div>
+                    </div>
+
+                    <input type="submit" name="" value="Signup">
+                    <p class="text-center" style="color: white;">Already have an account? <a href="/login">Log Up</a> </p>
+                    <!-- <div class="col-md-12">
+                        <ul class="social-network social-circle">
+                            <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li>
+                        </ul>
+                    </div> -->
+                </form>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>
