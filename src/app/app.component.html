@@ -23,7 +23,10 @@
                     <a class="nav-link active" *ngIf="isLogin" aria-current="page" routerLink="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLogin" aria-current="page" routerLink="/user-location">Message</a>
+                    <a class="nav-link active" *ngIf="isLogin" aria-current="page" routerLink="/user-location">User Location</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" *ngIf="isLogin" aria-current="page" routerLink="/user-message">User Message</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="isLogin" [routerLink] (click)='logout()'>Logout</a>

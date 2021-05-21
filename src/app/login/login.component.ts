@@ -14,11 +14,16 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loading = false;
   submitted = false;
+  isLogin: any
 
   constructor(public fb: FormBuilder,private apiService: ApisService, private toastr: ToastrService, private route: Router) { }
 
   ngOnInit(): void {
     this.LoginForm();
+  }
+
+  gettoken() {
+    this.isLogin = localStorage.getItem('token');
   }
 
   //---------------------------Create Login Form------------------------------------------------------
@@ -46,6 +51,7 @@ export class LoginComponent implements OnInit {
           this.toastr.success("SuccessFully User Login")
           localStorage.setItem("token",data.token)
           this.route.navigate([ '/' ]);
+          this.gettoken()
         },
         (err: HttpErrorResponse) => {
           if (err.error) {

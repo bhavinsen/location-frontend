@@ -29,5 +29,6 @@ export class AppComponent {
     localStorage.removeItem("token")
     this.route.navigateByUrl("/login")
     this.toastr.success('SuccessFully Logout!');
+    this.gettoken()
   }
 }
