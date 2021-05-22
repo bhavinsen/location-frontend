@@ -101,7 +101,8 @@ export class UserlocationComponent implements OnInit {
         (data: any) => {
           // console.log("data",data)
           this.toastr.success("SuccessFully save Location and message")
-          this.route.navigate([ '/user-location' ]);
+          this.modalService.hide()
+          this.route.navigate([ '/' ]);
         },
         (err: HttpErrorResponse) => {
           if (err.error) {

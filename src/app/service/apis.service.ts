@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 })
 export class ApisService {
   //--------------defiend base url-----------------------------------------
-  baseUri: string = 'https://messagelocationapi.herokuapp.com';
+  baseUri: string = 'http://127.0.0.1:8000';
 
   //--------------Defiend headers------------------------------------------
   // headers = new HttpHeaders().set('Authorization',"Bearer" + localStorage.getItem("token"));
