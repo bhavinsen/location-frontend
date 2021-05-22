@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApisService } from '../service/apis.service';
+import { DataSharingService } from '../service/data-sharing.service';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +16,12 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   isLogin: any
-
-  constructor(public fb: FormBuilder,private apiService: ApisService, private toastr: ToastrService, private route: Router) { }
+  isUserLoggedIn:any
+  constructor(private dataSharingService: DataSharingService,public fb: FormBuilder,private apiService: ApisService, private toastr: ToastrService, private route: Router) {
+    this.dataSharingService.isUserLoggedIn.subscribe( value => {
+      this.isUserLoggedIn = value;
+  });
+   }
 
   ngOnInit(): void {
     this.LoginForm();
@@ -51,7 +56,7 @@ export class LoginComponent implements OnInit {
           this.toastr.success("SuccessFully User Login")
           localStorage.setItem("token",data.token)
           this.route.navigate([ '/' ]);
-          this.gettoken()
+          this.dataSharingService.isUserLoggedIn.next(true);
         },
         (err: HttpErrorResponse) => {
           if (err.error) {

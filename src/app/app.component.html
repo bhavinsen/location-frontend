@@ -20,22 +20,22 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLogin" aria-current="page" routerLink="/">Home</a>
+                    <a class="nav-link active" *ngIf="isUserLoggedIn" aria-current="page" routerLink="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLogin" aria-current="page" routerLink="/user-location">User Location</a>
+                    <a class="nav-link active" *ngIf="isUserLoggedIn" aria-current="page" routerLink="/user-location">User Location</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" *ngIf="isLogin" aria-current="page" routerLink="/user-message">User Message</a>
+                    <a class="nav-link active" *ngIf="isUserLoggedIn" aria-current="page" routerLink="/user-message">User Message</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="isLogin" [routerLink] (click)='logout()'>Logout</a>
+                    <a class="nav-link" *ngIf="isUserLoggedIn" [routerLink] (click)='logout()'>Logout</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="!isLogin" routerLink="/login">Login</a>
+                    <a class="nav-link" *ngIf="!isUserLoggedIn" routerLink="/login">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="!isLogin" routerLink="/signup">Signup</a>
+                    <a class="nav-link" *ngIf="!isUserLoggedIn" routerLink="/signup">Signup</a>
                 </li>
             </ul>
         </div>
