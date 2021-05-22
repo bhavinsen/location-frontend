@@ -28,9 +28,8 @@ export class AppComponent {
 
   gettoken() {
     this.isLogin = localStorage.getItem('token');
-    if(this.isLogin !== "" ){
+    if(this.isLogin !== null){
       this.dataSharingService.isUserLoggedIn.next(true);
-
     }
   }
 
