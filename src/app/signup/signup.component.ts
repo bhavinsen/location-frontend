@@ -29,13 +29,8 @@ export class SignupComponent implements OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         if (position) {
-          console.log("position", position)
-          console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
           this.lat = position.coords.latitude;
           this.lng = position.coords.longitude;
-          console.log(this.lat);
-          console.log(this.lat);
         }
       },
         (error) => console.log(error));
@@ -47,7 +42,6 @@ export class SignupComponent implements OnInit {
 
   getGeoCodingUrl(longitude: number, latitude: number) {
     this.http.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`).subscribe((data) => {
-      console.log("test", data)
     })
   }
   //---------------------------Create Signup Form------------------------------------------------------
@@ -61,8 +55,8 @@ export class SignupComponent implements OnInit {
       country: ['', [Validators.required]],
       latitude: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
-      password: ['', [Validators.required]],
-      password_confirm: ['', [Validators.required]],
+      password: ['', [Validators.required],Validators.minLength(6)],
+      password_confirm: ['', [Validators.required],Validators.minLength(6)],
     })
   }
 
@@ -76,14 +70,12 @@ export class SignupComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
-    if (this.registerForm.invalid) {
+    if (this.registerForm.valid) {
       this.registerForm.value.latitude =  this.lat
       this.registerForm.value.longitude =  this.lng
       this.registerForm.value.username = this.registerForm.value.email
-      console.log(this.registerForm.value)
       this.apiService.createNewUser(this.registerForm.value).subscribe(
         (data: any) => {
-          console.log("data",data)
           this.toastr.success("SuccessFully Register User")
           this.route.navigate([ '/login' ]);
         },
@@ -99,8 +91,7 @@ export class SignupComponent implements OnInit {
       );
       return;
     } else {
-      this.toastr.success("User SuccessFully Registerd")
-      this.route.navigateByUrl('/login')
+      this.toastr.error("Before Submit Please check All Feilds")
     }
   }
 }

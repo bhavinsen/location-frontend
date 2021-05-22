@@ -16,12 +16,15 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   isLogin: any
-  isUserLoggedIn:any
-  constructor(private dataSharingService: DataSharingService,public fb: FormBuilder,private apiService: ApisService, private toastr: ToastrService, private route: Router) {
-    this.dataSharingService.isUserLoggedIn.subscribe( value => {
+  isUserLoggedIn: any
+
+  
+
+  constructor(private dataSharingService: DataSharingService, public fb: FormBuilder, private apiService: ApisService, private toastr: ToastrService, private route: Router) {
+    this.dataSharingService.isUserLoggedIn.subscribe(value => {
       this.isUserLoggedIn = value;
-  });
-   }
+    });
+  }
 
   ngOnInit(): void {
     this.LoginForm();
@@ -35,7 +38,7 @@ export class LoginComponent implements OnInit {
   LoginForm() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required],Validators.minLength(6)],
     })
   }
 
@@ -52,15 +55,14 @@ export class LoginComponent implements OnInit {
     } else {
       this.apiService.loginUser(this.loginForm.value).subscribe(
         (data: any) => {
-          console.log("data",data)
           this.toastr.success("SuccessFully User Login")
-          localStorage.setItem("token",data.token)
-          this.route.navigate([ '/' ]);
+          localStorage.setItem("token", data.token)
+          this.route.navigate(['/']);
           this.dataSharingService.isUserLoggedIn.next(true);
         },
         (err: HttpErrorResponse) => {
           if (err.error) {
-            if(err.error.error){
+            if (err.error.error) {
               this.toastr.error('Oops...', err.error.error)
             }
           } else {

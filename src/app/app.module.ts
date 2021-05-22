@@ -30,7 +30,7 @@ import { MessageComponent } from './message/message.component';
     SignupComponent,
     HomeComponent,
     UserlocationComponent,
-    MessageComponent
+    MessageComponent,
   ],
   imports: [
     BrowserModule,

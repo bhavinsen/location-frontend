@@ -24,9 +24,6 @@ export class MessageComponent implements OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         if (position) {
-          console.log("position", position)
-          console.log("Latitude: " + position.coords.latitude +
-            "Longitude: " + position.coords.longitude);
           this.lat = position.coords.latitude;
           this.lng = position.coords.longitude;
           // console.log(this.lat);
@@ -42,7 +39,6 @@ export class MessageComponent implements OnInit {
 
   getmessage() {
     this.apiService.getmessage().subscribe((data: any) => {
-      console.log("data", data)
       this.message = data
     })
   }
