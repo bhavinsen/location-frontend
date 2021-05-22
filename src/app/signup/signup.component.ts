@@ -55,7 +55,7 @@ export class SignupComponent implements OnInit {
       country: ['', [Validators.required]],
       latitude: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
-      password: ['', [Validators.required],Validators.minLength(6)],
+      password: ['', [Validators.required],Validators.minLength(6),],
       password_confirm: ['', [Validators.required],Validators.minLength(6)],
     })
   }
