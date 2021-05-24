@@ -19,7 +19,6 @@ export class ApisService {
   })
 
   constructor(private http: HttpClient) {
-    console.log("test",this.headers)
    }
 
 

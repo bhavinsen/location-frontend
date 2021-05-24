@@ -55,8 +55,8 @@ export class SignupComponent implements OnInit {
       country: ['', [Validators.required]],
       latitude: ['', [Validators.required]],
       longitude: ['', [Validators.required]],
-      password: ['', [Validators.required],Validators.minLength(6),],
-      password_confirm: ['', [Validators.required],Validators.minLength(6)],
+      password: ['', [Validators.required,Validators.minLength(6),Validators.pattern(/^(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{6,})/)]],
+      password_confirm: ['', [Validators.required,Validators.minLength(6)]],
     })
   }
 
@@ -69,29 +69,40 @@ export class SignupComponent implements OnInit {
   //---------------------------Submit Form-----------------------------------------------------------------
   onSubmit() {
     this.submitted = true;
-    // stop here if form is invalid
-    if (this.registerForm.valid) {
-      this.registerForm.value.latitude =  this.lat
-      this.registerForm.value.longitude =  this.lng
-      this.registerForm.value.username = this.registerForm.value.email
-      this.apiService.createNewUser(this.registerForm.value).subscribe(
-        (data: any) => {
-          this.toastr.success("SuccessFully Register User")
-          this.route.navigate([ '/login' ]);
-        },
-        (err: HttpErrorResponse) => {
-          if (err.error) {
-            if(err.error.email){
-              this.toastr.error('Oops...', err.error.email)
-            }
-          } else {
-            this.toastr.error('Oops...', 'Something went wrong!')
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        if (position) {
+          this.lat = position.coords.latitude;
+          this.lng = position.coords.longitude;
+
+          this.registerForm.value.latitude =  this.lat
+          this.registerForm.value.longitude =  this.lng
+          this.registerForm.value.username = this.registerForm.value.email
+          if (this.registerForm.value.password ==this.registerForm.value.password_confirm){
+            this.apiService.createNewUser(this.registerForm.value).subscribe(
+              (data: any) => {
+                this.toastr.success("SuccessFully Register User")
+                this.route.navigate([ '/login' ]);
+              },
+              (err: HttpErrorResponse) => {
+                if (err.error) {
+                  if(err.error.email){
+                    this.toastr.error('Oops...', err.error.email)
+                  }
+                } else {
+                  this.toastr.error('Oops...', 'Something went wrong!')
+                }
+              }
+            );
+            return;
+          }else{
+            this.toastr.error("Password Does not Match")
           }
         }
-      );
-      return;
+      },
+        (error) => this.toastr.error("Before Form submit allow location"));
     } else {
-      this.toastr.error("Before Submit Please check All Feilds")
+      alert("Geolocation is not supported by this browser.");
     }
   }
 }
